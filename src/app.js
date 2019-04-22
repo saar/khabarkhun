@@ -31,15 +31,15 @@ dotenv.config({ path: '.env.example' });
  * Controllers (route handlers).
  */
 const homeController = require('./controllers/home');
-const userController = require('./controllers/user');
+const userController = require('./components/user/index');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
-const newsController = require('./controllers/news');
-const swaggerMiddleware = require('./config/swagger/swaggerMiddleware');
+const newsController = require('./components/news/index');
+const swaggerMiddleware = require('../config/swagger/swaggerMiddleware');
 /**
  * API keys and Passport configuration.
  */
-const passportConfig = require('./config/passport');
+const passportConfig = require('../config/passport');
 
 /**
  * Create Express server.

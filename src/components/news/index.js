@@ -2,7 +2,7 @@
  * GET /news
  * List all news.
  */
-const News = require('../models/News.js');
+const News = require('./News.js');
 
 exports.getNews = (req, res) => {
   News.find((err, docs) => {
