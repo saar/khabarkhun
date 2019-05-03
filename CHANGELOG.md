@@ -360,7 +360,7 @@
 There are have been over **500+** commits since the initial announcement in
 January 2014 and over a **120** issues and pull requests from **28** contributors.
 
-- Documentation grew **8x** in size since the announcement on Hacker News
+- Documentation grew **8x** in size since the announcement on Hacker Article
 - Upgraded to Express 4.0
 - Generator for adding/removing authentication providers
 - New Instagram authentication that can be added via generator

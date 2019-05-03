@@ -1,0 +1,24 @@
+{
+  "apps": [
+    {
+      "name": "rss",
+      "cwd": "src",
+      "exec_interpreter": "node",
+      "script": "./workers/rss.js",
+      "watch": true,
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    {
+      "name": "conductor",
+      "cwd": "src",
+      "exec_interpreter": "node",
+      "script": "./workers/conductor.js",
+      "watch": true,
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  ]
+}
