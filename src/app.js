@@ -5,8 +5,6 @@ const express = require('express');
 
 const swaggerMiddleware = require('../config/swagger/swaggerMiddleware');
 const contactController = require('./controllers/contact');
-
-const userController = require('./components/user/controller');
 /**
  * Controllers (route handlers).
  */
@@ -135,15 +133,7 @@ app.use('/webfonts', express.static(
  * Primary app routes.
  */
 app.get('/', homeController.index);
-app.get('/login', userController.getLogin);
-app.post('/login', userController.postLogin);
-app.get('/logout', userController.logout);
-app.get('/forgot', userController.getForgot);
-app.post('/forgot', userController.postForgot);
-app.get('/reset/:token', userController.getReset);
-app.post('/reset/:token', userController.postReset);
-app.get('/signup', userController.getSignup);
-app.post('/signup', userController.postSignup);
+
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 
