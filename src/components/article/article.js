@@ -107,6 +107,8 @@ const ArticleSchema = new mongoose.Schema(
 			default: Date.now,
 		},
 		enclosures: [EnclosureSchema],
+		tags: [String],
+		categories: [String],
 		likes: {
 			type: Number,
 			default: 0,
@@ -176,12 +178,22 @@ ArticleSchema.methods.getParsedArticle = async function() {
 
 	try {
 		const parsed = await parseContent(url);
+		if (parsed.error) { // noinspection ExceptionCaughtLocallyJS
+			throw new Error(parsed.message);
+		}
+
 		const title = parsed.title || this.title;
 		const excerpt = parsed.excerpt || title || this.description;
 
 		if (!title) return null;
 
 		let content = sanitize(parsed.content);
+
+		this.categories = parsed.categories;
+		this.tags = parsed.tags;
+
+		await this.save();
+
 
 		// XKCD doesn't like Mercury
 		if (this.url.indexOf('https://xkcd') === 0) content = this.content;

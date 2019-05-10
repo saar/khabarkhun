@@ -56,7 +56,7 @@ const WwwVarzesh3ComExtractor = {
 	},
 	excerpt: {
 		selectors: [
-			'',
+			'.news-page--news-lead',
 		],
 	},
 	extend: {
