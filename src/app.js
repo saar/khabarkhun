@@ -1,14 +1,14 @@
 /**
  * Module dependencies.
  */
+const Article = require('./components/article/article');
+
 const express = require('express');
 
 const swaggerMiddleware = require('../config/swagger/swaggerMiddleware');
-const contactController = require('./controllers/contact');
 /**
  * Controllers (route handlers).
  */
-const homeController = require('./controllers/home');
 const sass = require('node-sass-middleware');
 const expressStatusMonitor = require('express-status-monitor');
 const expressValidator = require('express-validator');
@@ -55,6 +55,7 @@ mongoose.connection.on('error', (err) => {
 /**
  * Express configuration.
  */
+app.disable('x-powered-by');
 app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
 app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
@@ -81,61 +82,21 @@ app.use(session({
 }));
 app.use(flash());
 app.use((req, res, next) => {
-	if (req.path.startsWith('/api/')) {
-		next();
-	} else {
-		lusca.csrf()(req, res, next);
-	}
+	lusca.csrf()(req, res, next);
 });
 app.use(lusca.xframe('SAMEORIGIN'));
+
 app.use(lusca.xssProtection(true));
 
 app.use('/docs', swaggerMiddleware);
-
-app.disable('x-powered-by');
 app.use((req, res, next) => {
 	res.locals.user = req.user;
 	next();
 });
-app.use((req, res, next) => {
-	// After successful login, redirect back to the intended page
-	if (!req.user
-		&& req.path !== '/login'
-		&& req.path !== '/signup'
-		&& !req.path.match(/^\/auth/)
-		&& !req.path.match(/\./)) {
-		req.session.returnTo = req.originalUrl;
-	} else if (req.user
-		&& (req.path === '/account' || req.path.match(/^\/api/))) {
-		req.session.returnTo = req.originalUrl;
-	}
-	next();
-});
-app.use('/',
-	express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
-app.use('/js/lib',
-	express.static(path.join(__dirname, 'node_modules/chart.js/dist'),
-		{ maxAge: 31557600000 }));
-app.use('/js/lib',
-	express.static(path.join(__dirname, 'node_modules/popper.js/dist/umd'),
-		{ maxAge: 31557600000 }));
-app.use('/js/lib',
-	express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js'),
-		{ maxAge: 31557600000 }));
-app.use('/js/lib',
-	express.static(path.join(__dirname, 'node_modules/jquery/dist'),
-		{ maxAge: 31557600000 }));
-app.use('/webfonts', express.static(
-	path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free/webfonts'),
-	{ maxAge: 31557600000 }));
 
 /**
  * Primary app routes.
  */
-app.get('/', homeController.index);
-
-app.get('/contact', contactController.getContact);
-app.post('/contact', contactController.postContact);
 
 app.route('/api/rss').post(rssController.addFeed);
 
