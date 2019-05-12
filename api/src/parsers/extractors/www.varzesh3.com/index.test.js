@@ -57,7 +57,7 @@ describe('WwwVarzesh3ComExtractor', () => {
 			// Update these values with the expected values from
 			// the article.
 			assert.strictEqual(lead_image_url,
-				`https://static.farakav.com/files/pictures/01402433.jpg`);
+				`https://static.farakav.com/files/pictures/01402433 .jpg`);
 		});
 
 		it('returns the content', async () => {
