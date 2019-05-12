@@ -191,6 +191,7 @@ ArticleSchema.methods.getParsedArticle = async function() {
 
 		this.categories = parsed.categories;
 		this.tags = parsed.tags;
+		this.publicationDate = parsed.date_published;
 
 		await this.save();
 

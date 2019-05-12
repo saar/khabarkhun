@@ -9,6 +9,7 @@
   "scripts": {
     "build": "npx babel ./src --out-dir ./dist ",
     "start": "node src/app.js",
+    "rss-worker": "node src/workers/rss.js",
     "conductor-worker": "node src/workers/conductor.js",
     "test": "nyc mocha --timeout=10000 --exit",
     "lint": "eslint \"**/*.js\"",
