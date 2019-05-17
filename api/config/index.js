@@ -4,10 +4,7 @@ const path = require('path');
 const configs = {
 	development: { config: 'dev' },
 	production: { config: 'prod' },
-	test: {
-		config: 'test',
-		env: path.resolve(__dirname, '..', '..', 'test', '.env'),
-	},
+	test: { config: 'test' },
 };
 
 const currentEnvironment = process.env.NODE_ENV || 'development';

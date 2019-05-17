@@ -106,6 +106,9 @@ const ArticleSchema = new mongoose.Schema(
 			type: Date,
 			default: Date.now,
 		},
+		lastScraped: {
+			type: Date,
+		},
 		enclosures: [EnclosureSchema],
 		tags: [String],
 		categories: [String],
@@ -126,6 +129,11 @@ const ArticleSchema = new mongoose.Schema(
 			default: true,
 			valid: true,
 		},
+		consecutiveScrapeFailures: {
+			type: Number,
+			default: 0,
+		},
+
 	},
 	{
 		collection: 'articles',
@@ -154,6 +162,20 @@ const ArticleSchema = new mongoose.Schema(
 		},
 	},
 );
+
+ArticleSchema.statics.incrScrapeFailures = async function(id) {
+	await this.findOneAndUpdate(
+		{ _id: id },
+		{ $inc: { consecutiveScrapeFailures: 1 } },
+	).exec();
+};
+
+ArticleSchema.statics.resetScrapeFailures = async function(id) {
+	await this.findOneAndUpdate(
+		{ _id: id },
+		{ $set: { consecutiveScrapeFailures: 0 } },
+	).exec();
+};
 
 ArticleSchema.plugin(timestamps, {
 	createdAt: { index: true },
@@ -194,7 +216,6 @@ ArticleSchema.methods.getParsedArticle = async function() {
 		this.publicationDate = parsed.date_published;
 
 		await this.save();
-
 
 		// XKCD doesn't like Mercury
 		if (this.url.indexOf('https://xkcd') === 0) content = this.content;
