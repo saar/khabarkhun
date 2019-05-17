@@ -13,7 +13,7 @@ describe('WwwVarzesh3ComExtractor', () => {
 		let result;
 		let url;
 
-		beforeAll(() => {
+		beforeEach(() => {
 			Mercury.addExtractor(WwwVarzesh3ComExtractor);
 			url =
 				'https://www.varzesh3.com/news/1608590/%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4-%D8%B2%D9%86%D8%AF%D9%87-%D8%AA%D8%B1%D8%A7%DA%A9%D8%AA%D9%88%D8%B1%D8%B3%D8%A7%D8%B2%DB%8C-0-%D9%BE%D8%B1%D8%B3%D9%BE%D9%88%D9%84%DB%8C%D8%B3-0-%D9%84%DB%8C%DA%AF-%D8%A8%D8%B1%D8%AA%D8%B1-11-02-1398';
@@ -57,7 +57,7 @@ describe('WwwVarzesh3ComExtractor', () => {
 			// Update these values with the expected values from
 			// the article.
 			assert.strictEqual(lead_image_url,
-				`https://static.farakav.com/files/pictures/01402433 .jpg`);
+				`https://static.farakav.com/files/pictures/01402433.jpg`);
 		});
 
 		it('returns the content', async () => {

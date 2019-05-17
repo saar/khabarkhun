@@ -2,7 +2,7 @@ const request = require('request');
 const logger = require('../../utils/logger');
 const { PassThrough } = require('stream');
 const InflateAuto = require('inflate-auto');
-const { Gunzip } = require('zlib');
+const zlib = require('zlib');
 
 const userAgent = 'Khabarkhun: Open Source RSS & Podcast app: https://khabarkhun.ir/';
 const AcceptHeader = 'text/html,application/xhtml+xml,application/xml';
@@ -66,7 +66,7 @@ function checkHeaders(stream, url, checkContentType = false) {
 
 			// InflateAuto could be used for gzip to accept deflate data declared as gzip
 			const inflater = encoding === 'deflate' ? new InflateAuto() :
-				encoding === 'gzip' ? new Gunzip() :
+				encoding === 'gzip' ? new zlib.Gunzip() :
 					null;
 
 			if (inflater) {

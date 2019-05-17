@@ -8,12 +8,12 @@
   "license": "GPL-3",
   "scripts": {
     "build": "npx babel ./src --out-dir ./dist ",
-    "start": "node src/app.js",
-    "rss-worker": "node src/workers/rss.js",
-    "conductor-worker": "node src/workers/conductor.js",
+    "start": "node $NODE_DEBUG_OPTION src/app.js",
+    "rss-worker": "node $NODE_DEBUG_OPTION src/workers/rss.js",
+    "article-worker": "node $NODE_DEBUG_OPTION src/workers/article.js",
+    "conductor-worker": "node $NODE_DEBUG_OPTION src/workers/conductor.js",
     "test": "nyc mocha --timeout=10000 --exit",
-    "lint": "eslint \"**/*.js\"",
-    "watch:test": "jest --watch"
+    "lint": "eslint \"**/*.js\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",

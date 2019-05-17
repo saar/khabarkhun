@@ -4,6 +4,8 @@ const mongooseStringQuery = require('mongoose-string-query');
 const autopopulate = require('mongoose-autopopulate');
 const { EnclosureSchema } = require('./enclosure');
 const Content = require('./content');
+const RSS = require('../rss');
+
 const sanitize = require('../../utils/santitize');
 const { parseContent } = require('../../parsers/content');
 
@@ -27,6 +29,23 @@ const ArticleSchema = new mongoose.Schema(
 					'lastScraped',
 					'images',
 					'featured',
+				],
+			},
+			index: true,
+		},
+		fullContent: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Content',
+			required: false,
+			autopopulate: {
+				select: [
+					'url',
+					'title',
+					'excerpt',
+					'content',
+					'image',
+					'publicationDate',
+					'enclosures',
 				],
 			},
 			index: true,
@@ -192,11 +211,11 @@ ArticleSchema.index({ publicationDate: -1 });
 // 	return getUrl('article_detail', this.rss._id, this._id);
 // };
 
-ArticleSchema.methods.getParsedArticle = async function() {
+ArticleSchema.methods.getParsedArticle = async function(force = false) {
 	const url = this.url;
 
 	const content = await Content.findOne({ url });
-	if (content) return content;
+	if (content && !force) return content;
 
 	try {
 		const parsed = await parseContent(url);
@@ -215,12 +234,11 @@ ArticleSchema.methods.getParsedArticle = async function() {
 		this.tags = parsed.tags;
 		this.publicationDate = parsed.date_published;
 
-		await this.save();
 
 		// XKCD doesn't like Mercury
-		if (this.url.indexOf('https://xkcd') === 0) content = this.content;
 
-		return await Content.create({
+		if (this.url.indexOf('https://xkcd') === 0) content = this.content;
+		let fullContent = await Content.create({
 			content,
 			title,
 			url,
@@ -230,10 +248,23 @@ ArticleSchema.methods.getParsedArticle = async function() {
 			commentUrl: this.commentUrl,
 			enclosures: this.enclosures,
 		});
+
+		await Article.findOneAndUpdate(
+			{ _id: this._id },
+			{
+				'$set': {
+					categories: parsed.categories,
+					tags: parsed.tags,
+					publicationDate: parsed.date_published,
+					fullContent: fullContent,
+				},
+			});
+		return fullContent;
 	} catch (e) {
 		throw new Error(`Mercury call failed for ${this.url}: ${e.message}`);
 	}
 };
 
-module.exports = exports = mongoose.model('Article', ArticleSchema);
+let Article = mongoose.model('Article', ArticleSchema);
+module.exports = exports = Article;
 module.exports.ArticleSchema = ArticleSchema;

@@ -1,7 +1,7 @@
 const moment = require('moment');
 
 const WwwVarzesh3ComExtractor = {
-	domain: 'www.varzesh3.com',
+	domain: 'varzesh3.com',
 
 	title: {
 		selectors: [
