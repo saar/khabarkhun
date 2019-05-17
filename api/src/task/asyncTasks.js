@@ -11,6 +11,13 @@ const rssQueue = new Queue('rss', config.cache.uri, {
 		maxStalledCount: 2,
 	},
 });
+const articleQueue = new Queue('article', config.cache.uri, {
+	settings: {
+		lockDuration: 90000,
+		stalledInterval: 75000,
+		maxStalledCount: 2,
+	},
+});
 
 function makeMetricKey(queue, event) {
 	return ['khabarkhun', 'bull', queue.name, event].join('.');
@@ -69,21 +76,36 @@ function AddQueueTracking(queue) {
 const currentEnvironment = process.env.NODE_ENV || 'development';
 if (currentEnvironment !== 'test') {
 	AddQueueTracking(rssQueue);
+	AddQueueTracking(articleQueue);
 }
 
 const RssQueueAdd = rssQueue.add.bind(rssQueue);
+const ArticleQueueAdd = articleQueue.add.bind(articleQueue);
 
 function ProcessRssQueue() {
 	getStatsDClient().increment(makeMetricKey(rssQueue, 'started'));
 	return rssQueue.process(...arguments);
+}
+function ProcessArticleQueue() {
+	getStatsDClient().increment(makeMetricKey(articleQueue, 'started'));
+	return articleQueue.process(...arguments);
 }
 
 function ShutDownRssQueue() {
 	getStatsDClient().increment(makeMetricKey(rssQueue, 'stopped'));
 	return rssQueue.close(...arguments);
 }
+function ShutDownArticleQueue() {
+	getStatsDClient().increment(makeMetricKey(articleQueue, 'stopped'));
+	return articleQueue.close(...arguments);
+}
 
 module.exports.rssQueue = rssQueue;
 module.exports.RssQueueAdd = RssQueueAdd;
 module.exports.ProcessRssQueue = ProcessRssQueue;
 module.exports.ShutDownRssQueue = ShutDownRssQueue;
+
+module.exports.articleQueue = articleQueue;
+module.exports.ArticleQueueAdd = ArticleQueueAdd;
+module.exports.ProcessArticleQueue = ProcessArticleQueue;
+module.exports.ShutDownArticleQueue = ShutDownArticleQueue;

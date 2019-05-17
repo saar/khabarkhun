@@ -236,7 +236,6 @@ ArticleSchema.methods.getParsedArticle = async function(force = false) {
 
 
 		// XKCD doesn't like Mercury
-
 		if (this.url.indexOf('https://xkcd') === 0) content = this.content;
 		let fullContent = await Content.create({
 			content,

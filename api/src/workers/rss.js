@@ -1,6 +1,10 @@
 const { sleep } = require('../utils');
-const { ProcessRssQueue, ShutDownRssQueue } = require('../task/asyncTasks');
-const { removeFromQueueFlagSet } = require('../utils/queue');
+const { ProcessRssQueue, ShutDownRssQueue } = require(
+	'../task/asyncTasks');
+
+const { ArticleQueueAdd } = require('../task/asyncTasks');
+const { removeFromQueueFlagSet, tryAddToQueueFlagSet } = require(
+	'../utils/queue');
 
 const logger = require('../utils/logger');
 const mongoose = require('mongoose');
@@ -184,6 +188,26 @@ async function handleRSS(job) {
 		filter((a) => !!a.url);
 	logger.info(
 		`Finished updating. ${updatedArticles.length} out of ${ rssContent.articles.length } changed for RSS with ID ${rssID}`,
+	);
+
+	const updated = await Promise.all(
+		updatedArticles.map(article => tryAddToQueueFlagSet('article',
+			'article', article._id)),
+	);
+
+	logger.info(
+		`marked ${ updated.filter(
+			(u) => !!u).length } of articles as isParsing`);
+	logger.debug(`updated ${JSON.stringify(updated)}`);
+	
+	await Promise.all(
+		updatedArticles.map((article) => {
+			const job = {
+				article: article._id
+			};
+			return ArticleQueueAdd(job,
+				{ removeOnComplete: true, removeOnFail: true });
+		}),
 	);
 
 	await RSS.update(
