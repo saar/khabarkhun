@@ -2239,7 +2239,7 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^2.8.1, commander@~2.20.0:
+commander@^2.19.0, commander@^2.8.1, commander@~2.20.0:
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
   integrity sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==
@@ -4434,6 +4434,15 @@ istanbul-reports@^2.1.1:
   integrity sha512-FzNahnidyEPBCI0HcufJoSEoKykesRlFcSzQqjH9x0+LC8tnnE/p/90PBLu8iZTxr8yYZNyTtiAujUqyN+CIxw==
   dependencies:
     handlebars "^4.1.0"
+
+jalali-moment@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jalali-moment/-/jalali-moment-3.3.1.tgz#28d6b61d892bad2d8982512278346fa44bccdd22"
+  integrity sha512-PHX80LqSBrOraUDceojyLVgZ54blcvPr4pSGaVChe7iCfatZuFMMym+xQ3k4mbcbaXhLvKAlnSds9LsdRWZOaw==
+  dependencies:
+    commander "^2.19.0"
+    inquirer "^6.2.2"
+    moment "^2.23.0"
 
 jest-changed-files@^24.8.0:
   version "24.8.0"

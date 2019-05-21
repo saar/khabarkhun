@@ -46,6 +46,7 @@
     "htmlparser2": "^3.10.1",
     "inflate-auto": "^1.0.0",
     "instagram-node": "^0.5.8",
+    "jalali-moment": "^3.3.1",
     "joi": "^14.3.1",
     "jquery": "^3.3.1",
     "lastfm": "^0.9.3",

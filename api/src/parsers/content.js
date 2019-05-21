@@ -6,8 +6,9 @@ const axios = require('axios');
 
 async function parseContent(url) {
 
-
 	Mercury.addExtractor(require('./extractors/www.varzesh3.com'));
+	Mercury.addExtractor(require('./extractors/www.yjc.ir'));
+	Mercury.addExtractor(require('./extractors/www.tasnimnews.com'));
 	const html = await fetchHtml(url);
 
 	return await Mercury.parse(url, {
@@ -47,7 +48,6 @@ async function fetchHtml(url) {
 			stream.on('end', () => resolve(Buffer.concat(chunks).toString()));
 		})]);
 }
-
 
 // Read the given feed URL and return a Stream
 async function getConnectionStream(url, retries = 2, backoffDelay = 100) {
