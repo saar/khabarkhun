@@ -25,6 +25,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const rssController = require('./components/rss/controller');
+const articleController = require('./components/article/controller');
 
 // const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -81,9 +82,9 @@ app.use(session({
 	}),
 }));
 app.use(flash());
-app.use((req, res, next) => {
-	lusca.csrf()(req, res, next);
-});
+// app.use((req, res, next) => {
+// 	lusca.csrf()(req, res, next);
+// });
 app.use(lusca.xframe('SAMEORIGIN'));
 
 app.use(lusca.xssProtection(true));
@@ -100,6 +101,7 @@ app.use((req, res, next) => {
 
 app.route('/api/rss').post(rssController.addFeed);
 
+app.use('/api/article', articleController);
 /**
  * Error Handler.
  */

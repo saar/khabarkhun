@@ -4,6 +4,8 @@ const { sleep } = require('../utils');
 const Mercury = require('@postlight/mercury-parser');
 const axios = require('axios');
 
+const logger = require('../utils/logger');
+
 async function parseContent(url) {
 
 	Mercury.addExtractor(require('./extractors/www.varzesh3.com'));

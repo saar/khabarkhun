@@ -33,10 +33,10 @@ const WwwVarzesh3ComExtractor = {
 
 	lead_image_url: {
 		selectors: [
-			[
-				'meta[name="og:image"]~meta[name="og:image"]',
+			['meta[name="og:image"]~meta[name="og:image"]',
 				'value'],
-		], allowMultiple: false,
+			['img\\:first-of-type','src'],
+		], allowMultiple: false, extractor: true,
 
 	},
 

@@ -32,10 +32,7 @@ const WwwYjcIrExtractor = {
 		selectors: [
 			[
 				'div.body img.image_btn', 'src',
-			], (item)=> {
-				console.log(item);
-				return item;
-			}],
+			]],
 	},
 
 	content: {

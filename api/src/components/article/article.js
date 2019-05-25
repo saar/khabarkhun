@@ -82,6 +82,7 @@ const ArticleSchema = new mongoose.Schema(
 			type: String,
 			trim: true,
 			required: true,
+			index: true,
 		},
 		description: {
 			type: String,
@@ -152,6 +153,14 @@ const ArticleSchema = new mongoose.Schema(
 			type: Number,
 			default: 0,
 		},
+		visitCount: {
+			type: Number,
+			default: 0,
+		},
+		likeCount: {
+			type: Number,
+			default: 0,
+		},
 
 	},
 	{
@@ -186,6 +195,32 @@ ArticleSchema.statics.incrScrapeFailures = async function(id) {
 	await this.findOneAndUpdate(
 		{ _id: id },
 		{ $inc: { consecutiveScrapeFailures: 1 } },
+	).exec();
+};
+ArticleSchema.statics.incrVisitCount = async function(id) {
+	await this.findOneAndUpdate(
+		{ _id: id },
+		{ $inc: { visitCount: 1 } },
+	).exec();
+};
+
+ArticleSchema.statics.incrLikeCount = async function(id) {
+	await this.findOneAndUpdate(
+		{ _id: id },
+		{ $inc: { likeCount: 1 } },
+	).exec();
+};
+ArticleSchema.statics.decVisitCount = async function(id) {
+	await this.findOneAndUpdate(
+		{ _id: id },
+		{ $inc: { visitCount: 1 } },
+	).exec();
+};
+
+ArticleSchema.statics.decLikeCount = async function(id) {
+	await this.findOneAndUpdate(
+		{ _id: id },
+		{ $inc: { likeCount: 1 } },
 	).exec();
 };
 

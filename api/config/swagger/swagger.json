@@ -21,24 +21,223 @@
     }
   ],
   "paths": {
-    "/rss": {
+    "/article": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Return must recent articles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "p",
+          "in": "query",
+          "description": "Page Number",
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ]
+    },
+    "/article/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Article ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get article by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/article/{id}/comment": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Get comments fonr an article",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Comment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "requestBody": {
           "content": {
             "application/json": {
-              "examples": {
-                "feedUrl": {
-                  "value": {
-                    "feedUrl": "http://example.com"
-                  }
-                }
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
               }
             }
           },
           "required": true
         },
         "responses": {
+          "201": {
+            "description": "Comment addee successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid comment.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Article ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/article/category/{category}/": {
+      "get": {
+        "parameters": [
+          {
+            "name": "p",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
           "200": {
+            "description": "Get articles for specefic category.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "category",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/article/tag/{tag}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "p",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "tag",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get articles by tag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rss": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {}
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Add an RSS feed",
             "content": {
               "application/json": {
                 "schema": {
@@ -55,6 +254,140 @@
           }
         }
       }
+    },
+    "/article/rss/{rss}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "List of articles by rss id"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "rss",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/article/{id}/like/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Likes count of article",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Like Article",
+        "responses": {
+          "200": {
+            "description": "Liked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Dislike Article",
+        "responses": {
+          "200": {
+            "description": "Disliked and return likes count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Article ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/article/{id}/visit/": {
+      "get": {
+        "summary": "Seen an article",
+        "responses": {
+          "200": {
+            "description": "count of visits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Seen Article",
+        "responses": {
+          "200": {
+            "description": "Liked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Unseen article",
+        "responses": {
+          "200": {
+            "description": "Mark as unseened and return seens count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Article ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
     }
   },
   "components": {
@@ -74,6 +407,64 @@
           }
         }
       },
+      "Enclosure": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "length": {
+            "type": "string"
+          }
+        }
+      },
+      "Content": {
+        "title": "Content",
+        "required": [
+          "url",
+          "title",
+          "excerpt",
+          "content"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "excerpt": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "publicationDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enclosures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Enclosure"
+            }
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
       "Images": {
         "type": "object",
         "properties": {
@@ -87,6 +478,114 @@
             "type": "string"
           },
           "og": {
+            "type": "string"
+          }
+        }
+      },
+      "Article": {
+        "title": "Article",
+        "required": [
+          "rss",
+          "url",
+          "fingerprint",
+          "title"
+        ],
+        "properties": {
+          "rss": {
+            "type": "string"
+          },
+          "fullContent": {
+            "type": "string"
+          },
+          "duplicateOf": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "canonicalUrl": {
+            "type": "string"
+          },
+          "fingerprint": {
+            "type": "string"
+          },
+          "guid": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "content": {
+            "$ref": "#/components/schemas/Content"
+          },
+          "commentUrl": {
+            "type": "string"
+          },
+          "images.featured": {
+            "type": "string"
+          },
+          "images.banner": {
+            "type": "string"
+          },
+          "images.favicon": {
+            "type": "string"
+          },
+          "images.og": {
+            "type": "string"
+          },
+          "publicationDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastScraped": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "enclosures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Enclosure"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "likes": {
+            "type": "number"
+          },
+          "socialScore.reddit": {
+            "type": "number"
+          },
+          "socialScore.hackernews": {
+            "type": "number"
+          },
+          "valid": {
+            "type": "boolean"
+          },
+          "consecutiveScrapeFailures": {
+            "type": "number"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
             "type": "string"
           }
         }
@@ -170,6 +669,23 @@
           },
           "images": {
             "$ref": "#/components/schemas/Images"
+          }
+        }
+      },
+      "Comment": {
+        "description": "Comment for article.    ",
+        "required": [
+          "Comment"
+        ],
+        "type": "object",
+        "properties": {
+          "rate": {
+            "description": "Rate for article    ",
+            "type": "integer"
+          },
+          "Comment": {
+            "description": "Comment for article",
+            "type": "string"
           }
         }
       }
