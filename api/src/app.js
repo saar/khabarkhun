@@ -24,6 +24,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const rssController = require('./components/rss/controller');
 const articleController = require('./components/article/controller');
+const cors = require('cors');
 
 // const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -51,6 +52,7 @@ mongoose.connection.on('error', (err) => {
 /**
  * Express configuration.
  */
+app.use(cors())
 app.disable('x-powered-by');
 app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
 app.set('port', process.env.API_PORT || process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
