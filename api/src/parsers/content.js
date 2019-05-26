@@ -13,9 +13,10 @@ async function parseContent(url) {
 	Mercury.addExtractor(require('./extractors/www.tasnimnews.com'));
 	const html = await fetchHtml(url);
 
-	return await Mercury.parse(url, {
+	let result = await Mercury.parse(url, {
 		html, fallback: false,
 	});
+	return result;
 }
 
 async function fetchData(url, redirectCount = 0, maxRedirects = 5) {
@@ -47,7 +48,7 @@ async function fetchHtml(url) {
 			let stream = await getConnectionStream(url);
 			stream.on('data', chunk => chunks.push(chunk));
 			stream.on('error', reject);
-			stream.on('end', () => resolve(Buffer.concat(chunks).toString()));
+			stream.on('end', () => resolve(Buffer.concat(chunks)));
 		})]);
 }
 
