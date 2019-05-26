@@ -231,7 +231,18 @@
       "post": {
         "requestBody": {
           "content": {
-            "application/json": {}
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RSS"
+                            },
+                            "examples": {
+                                "varzesh3.com": {
+                                    "value": {
+                                        "feedUrl": "http://varzesh3.com"
+                                    }
+                                }
+                            }
+                        }
           },
           "required": true
         },
