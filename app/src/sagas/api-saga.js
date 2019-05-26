@@ -15,7 +15,7 @@ function* workerSaga() {
 }
 
 function getData() {
-  return fetch("http://localhost:3900/api/posts").then(response =>
+  return fetch("http://198.23.143.225:3900/api/posts").then(response =>
     response.json()
   );
 }
