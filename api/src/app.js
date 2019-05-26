@@ -52,7 +52,7 @@ mongoose.connection.on('error', (err) => {
 /**
  * Express configuration.
  */
-app.use(cors())
+app.use(cors());
 app.disable('x-powered-by');
 app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
 app.set('port', process.env.API_PORT || process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
@@ -106,7 +106,7 @@ if (process.env.NODE_ENV === 'development') {
 	// only use in development
 	app.use(errorHandler());
 } else {
-	app.use((err, req, res) => {
+	app.use((req, res) => {
 		res.status(500).send('Server Error');
 	});
 }
