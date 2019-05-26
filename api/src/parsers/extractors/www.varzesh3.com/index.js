@@ -35,8 +35,14 @@ const WwwVarzesh3ComExtractor = {
 		selectors: [
 			['meta[name="og:image"]~meta[name="og:image"]',
 				'value'],
-			['img\\:first-of-type','src'],
-		], allowMultiple: false, extractor: true,
+			[
+				'img.first_image_in_article', 'src'],
+		],
+		extractHtml: true,
+		allowMultiple: false,
+
+		extractor: true,
+		defaultCleaner: false,
 
 	},
 
@@ -47,7 +53,11 @@ const WwwVarzesh3ComExtractor = {
 
 		// Is there anything in the content you selected that needs transformed
 		// before it's consumable content? E.g., unusual lazy loaded images
-		transforms: {},
+		transforms: {
+			'img': ($node, $) => {
+				$node.first().addClass('first_image_in_article');
+			},
+		},
 
 		// Is there anything that is in the result that shouldn't be?
 		// The clean selectors will remove anything that matches from
