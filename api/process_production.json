@@ -7,7 +7,7 @@
       "script": "./workers/rss.js",
       "watch": true,
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "production"
       }
     },
     {
@@ -17,7 +17,7 @@
       "script": "./workers/article.js",
       "watch": true,
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "production"
       }
     },
     {
@@ -27,7 +27,7 @@
       "script": "./workers/conductor.js",
       "watch": true,
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "production"
       }
     },
     {
@@ -36,8 +36,9 @@
       "script": "./src/app.js",
       "watch": true,
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "production"
       }
     }
+
   ]
 }

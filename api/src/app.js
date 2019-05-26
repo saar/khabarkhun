@@ -1,7 +1,6 @@
 /**
  * Module dependencies.
  */
-const Article = require('./components/article/article');
 
 const express = require('express');
 
@@ -17,7 +16,6 @@ const path = require('path');
 const flash = require('express-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const dotenv = require('dotenv');
 const lusca = require('lusca');
 const errorHandler = require('errorhandler');
 const chalk = require('chalk');
@@ -29,10 +27,7 @@ const articleController = require('./components/article/controller');
 
 // const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
-/**
- * Load environment variables from .env file, where API keys and passwords are configured.
- */
-dotenv.config({ path: '.env.example' });
+
 /**
  * Create Express server.
  */
@@ -58,7 +53,7 @@ mongoose.connection.on('error', (err) => {
  */
 app.disable('x-powered-by');
 app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
-app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
+app.set('port', process.env.API_PORT || process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(expressStatusMonitor());
@@ -110,7 +105,6 @@ if (process.env.NODE_ENV === 'development') {
 	app.use(errorHandler());
 } else {
 	app.use((err, req, res) => {
-		console.error(err);
 		res.status(500).send('Server Error');
 	});
 }
