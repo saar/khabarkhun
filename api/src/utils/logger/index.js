@@ -1,4 +1,5 @@
 const winston = require('winston');
+
 const { inspect } = require('util');
 
 const config = require('../../../config');
@@ -18,7 +19,6 @@ const warnAboutWinston = format((info) => {
 	}
 	return info;
 });
-
 const sillyWinstonConsoleFormatter = format.printf((info) => {
 	let message = info.message;
 	if (isError(message)) {
@@ -33,13 +33,26 @@ const sillyWinstonConsoleFormatter = format.printf((info) => {
 		: '';
 	return `[${info.timestamp}] ${info.level}: ${message} ${meta}`;
 });
+// Ignore log messages if they have { private: true }
+const ignorePrivate = format((info, opts) => {
+	if (info.private) { return false; }
+	return info;
+});
 
 const logger = winston.createLogger({
 	level: config.logger.level,
 	format: format.combine(
-		format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
+		ignorePrivate(),
+		winston.format.errors({ stack: true }),
+		winston.format.splat(),
+		winston.format.json(),
+		format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SS Z' }),
+		winston.format.prettyPrint(),
+		// winston.format.colorize({ all: true }),
 		warnAboutWinston(),
-		sillyWinstonConsoleFormatter,
+		// winston.format.align(),
+
+		// betterWinstonConsoleFormatter(),
 	),
 	transports: [new winston.transports.Console()],
 });

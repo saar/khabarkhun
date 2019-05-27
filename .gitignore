@@ -25,8 +25,6 @@ public/js/lib/bootstrap.min*
 public/js/lib/jquery.min*
 public/js/lib/popper.min*
 
-# API keys and secrets
-.env
 
 # Dependency directory
 node_modules
