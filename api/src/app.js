@@ -1,14 +1,12 @@
 /**
  * Module dependencies.
  */
+const logger = require('./utils/logger');
 
-const express = require('express');
 
-const swaggerMiddleware = require('../config/swagger/swaggerMiddleware');
-/**
- * Controllers (route handlers).
- */
+
 const sass = require('node-sass-middleware');
+const express = require('express');
 const expressStatusMonitor = require('express-status-monitor');
 const expressValidator = require('express-validator');
 const mongoose = require('mongoose');
@@ -16,15 +14,23 @@ const path = require('path');
 const flash = require('express-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const bodyParser = require('body-parser');
+const chalk = require('chalk');
 const lusca = require('lusca');
 const errorHandler = require('errorhandler');
-const chalk = require('chalk');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
 const compression = require('compression');
+const cors = require('cors');
+
+/**
+ * Middleware (route handlers).
+ */
+const swaggerMiddleware = require('../config/swagger/swaggerMiddleware');
+
+/**
+ * Controllers (route handlers).
+ */
 const rssController = require('./components/rss/controller');
 const articleController = require('./components/article/controller');
-const cors = require('cors');
 
 // const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -64,7 +70,7 @@ app.use(sass({
 	src: path.join(__dirname, 'public'),
 	dest: path.join(__dirname, 'public'),
 }));
-app.use(logger('dev'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
@@ -115,9 +121,9 @@ if (process.env.NODE_ENV === 'development') {
  * Start Express server.
  */
 app.listen(app.get('port'), () => {
-	console.log('%s App is running at http://localhost:%d in %s mode',
+	logger.info('%s App is running at http://localhost:%d in %s mode',
 		chalk.green('✓'), app.get('port'), app.get('env'));
-	console.log('  Press CTRL-C to stop\n');
+	logger.debug('  Press CTRL-C to stop\n');
 });
 
 module.exports = app;
