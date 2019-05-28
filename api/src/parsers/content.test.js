@@ -2,7 +2,7 @@ const assert = require('assert');
 const { parseContent } = require('./content');
 
 describe('Content Parser', () => {
-	describe('initial test case', () => {
+	describe('varzesh3.com test', () => {
 
 		let url;
 		let result;
@@ -15,7 +15,24 @@ describe('Content Parser', () => {
 			const { title } = result;
 			// Update these values with the expected values from
 			// the article.
-			assert.strictEqual(title,`تلاش لیکنز و شاگردانش برای پایان خوش فصل (عکس)`);
+			assert.strictEqual(title,
+				`تلاش لیکنز و شاگردانش برای پایان خوش فصل (عکس)`);
+		});
+	});
+
+	describe('yjc.ir test', () => {
+
+		let url;
+		let result;
+
+		it('returns the Tags', async () => {
+			url = 'https://yjc.ir/fa/news/6947821/%D8%A2%D8%A8%D8%B1%D8%B3%D8%A7%D9%86%DB%8C-%D8%A8%D9%87-%DB%B4%DB%B8%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C-%D8%A7%D8%B3%D8%AA%D8%A7%D9%86-%D8%A7%DB%8C%D9%84%D8%A7%D9%85-%D8%AF%D8%B1-%D8%B3%D8%A7%D9%84-%DB%B9%DB%B7';
+			result = await parseContent(url, 4000, 3, 100);
+			// To pass this test, fill out the title selector
+			const { tags } = result;
+			// Update these values with the expected values from
+			// the article.
+			assert.strictEqual(tags[0], `وزارت نیرو`);
 		});
 	});
 });

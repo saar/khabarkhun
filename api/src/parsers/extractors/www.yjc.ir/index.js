@@ -2,7 +2,7 @@ const { convertNumbersToEnglish } = require('../../../utils');
 
 const moment = require('jalali-moment');
 const WwwYjcIrExtractor = {
-	domain: 'www.yjc.ir',
+	domain: 'yjc.ir',
 
 	title: {
 		selectors: [
@@ -67,8 +67,7 @@ const WwwYjcIrExtractor = {
 			allowMultiple: true,
 		},
 		tags: {
-			selectors: [
-				[
+			selectors: [[
 					'meta[name=\'article:tag\']', 'value', (item) => {
 					return item.split(/\s*,\s*/);
 				}]],

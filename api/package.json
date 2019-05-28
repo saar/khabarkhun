@@ -20,7 +20,6 @@
     "@ladjs/bootstrap-social": "^7.0.2",
     "@octokit/rest": "^16.23.2",
     "@postlight/mercury-parser": "git+https://github.com/saar/mercury-parser.git",
-    "axios": "^0.18.0",
     "bcrypt": "^3.0.5",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",

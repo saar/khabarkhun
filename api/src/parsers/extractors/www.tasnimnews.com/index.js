@@ -3,7 +3,7 @@ const { convertNumbersToEnglish, convertLettersToPersian } = require(
 
 const moment = require('jalali-moment');
 const WwwTasnimnewsComExtractor = {
-	domain: 'www.tasnimnews.com',
+	domain: 'tasnimnews.com',
 
 	title: {
 		selectors: [
