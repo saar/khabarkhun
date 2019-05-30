@@ -12,6 +12,7 @@ async function parseContent(
 	Mercury.addExtractor(require('./extractors/www.varzesh3.com'));
 	Mercury.addExtractor(require('./extractors/www.yjc.ir'));
 	Mercury.addExtractor(require('./extractors/www.tasnimnews.com'));
+	Mercury.addExtractor(require('./extractors/www.isna.ir'));
 	const html = await fetchHtml(url, ttl, retries, backoffDelay);
 
 	let result = await Mercury.parse(url, {
