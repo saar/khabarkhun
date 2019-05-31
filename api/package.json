@@ -94,7 +94,8 @@
     "twilio": "^3.30.0",
     "twit": "^2.2.11",
     "validator": "^10.11.0",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^3.9.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

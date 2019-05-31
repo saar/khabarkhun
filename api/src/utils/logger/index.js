@@ -1,7 +1,10 @@
 const winston = require('winston');
 
+const { join } = require('path');
+
 const { inspect } = require('util');
 
+require('winston-daily-rotate-file');
 const config = require('../../../config');
 
 const { format } = winston;
@@ -35,7 +38,9 @@ const sillyWinstonConsoleFormatter = format.printf((info) => {
 });
 // Ignore log messages if they have { private: true }
 const ignorePrivate = format((info, opts) => {
-	if (info.private) { return false; }
+	if (info.private) {
+		return false;
+	}
 	return info;
 });
 
@@ -54,7 +59,16 @@ const logger = winston.createLogger({
 
 		// betterWinstonConsoleFormatter(),
 	),
-	transports: [new winston.transports.Console()],
+	transports: [new winston.transports.Console(),
+	],
 });
+logger.add(new (winston.transports.DailyRotateFile)({
+	filename: join(__dirname, '../../../../log/application-%DATE%.log'),
+	datePattern: 'YYYY-MM-DD-HH',
+	zippedArchive: true,
+	maxSize: '20m',
+	maxFiles: '14d',
+}));
+
 
 module.exports = exports = logger;
