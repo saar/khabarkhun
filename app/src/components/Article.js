@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {getData} from "../actions";
+import {articlesRequested} from "../actions/index";
 
-export class Post extends Component {
+export class Article extends Component {
 
   componentDidMount() {
-    this.props.getData();
+    this.props.articlesRequested();
   }
 
   render() {
@@ -13,7 +13,7 @@ export class Post extends Component {
       <ul className="list-group list-group-flush">
         {this.props.articles.map(el => (
           <li className="list-group-item" key={el.id}>
-            {el.title}
+            {el.rss.title} - {el.title}
           </li>
         ))}
       </ul>
@@ -23,8 +23,8 @@ export class Post extends Component {
 
 function mapStateToProps(state) {
   return {
-    articles: state.remoteArticles.slice(0, 20)
+    articles: state.remoteArticles
   };
 }
 
-export default connect(mapStateToProps, {getData})(Post);
+export default connect(mapStateToProps, {articlesRequested})(Article);

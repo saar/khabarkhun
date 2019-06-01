@@ -1,21 +1,21 @@
 import {takeEvery, call, put} from "redux-saga/effects";
-import  {DATA_LOADED} from "../constants/action-types";
+import  {ARTICLES_REQUESTED, ARTICLES_LOADED, API_ERRORED} from "../constants/action-types";
 
-export default function* watcherSaga() {
-  yield takeEvery("DATA_REQUESTED", workerSaga);
+export default function* articleWatch() {
+  yield takeEvery(ARTICLES_REQUESTED, fetchArticles);
 }
 
-function* workerSaga() {
+function* fetchArticles() {
   try {
-    const payload = yield call(getData);
-    yield put({type: DATA_LOADED, payload});
+    const payload = yield call(getArticles);
+    yield put({type: ARTICLES_LOADED, payload});
   } catch (e) {
-    yield put({type: "API_ERRORED", payload: e});
+    yield put({type: API_ERRORED, payload: e});
   }
 }
 
-function getData() {
-  return fetch("http://198.23.143.225:3900/api/posts").then(response =>
+function getArticles() {
+  return fetch("http://198.23.143.225:9090/api/article").then(response =>
     response.json()
   );
 }
