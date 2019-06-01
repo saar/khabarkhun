@@ -3,8 +3,6 @@
  */
 const logger = require('./utils/logger');
 
-
-
 const sass = require('node-sass-middleware');
 const express = require('express');
 const expressStatusMonitor = require('express-status-monitor');
@@ -31,9 +29,7 @@ const swaggerMiddleware = require('../config/swagger/swaggerMiddleware');
  */
 const rssController = require('./components/rss/controller');
 const articleController = require('./components/article/controller');
-
 // const upload = multer({ dest: path.join(__dirname, 'uploads') });
-
 
 /**
  * Create Express server.
@@ -101,10 +97,15 @@ app.use((req, res, next) => {
 /**
  * Primary app routes.
  */
-
 app.route('/api/rss').post(rssController.addFeed);
 
 app.use('/api/article', articleController);
+
+/**
+ * serve front app
+ */
+app.use('/', express.static(path.join(__dirname, '../../app/build'), { maxAge: 31557600000 }));
+
 /**
  * Error Handler.
  */

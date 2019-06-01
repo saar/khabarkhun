@@ -15,7 +15,7 @@ function* fetchArticles() {
 }
 
 function getArticles() {
-  return fetch("http://198.23.143.225:9090/api/article").then(response =>
+  return fetch("/api/article").then(response =>
     response.json()
   );
 }
