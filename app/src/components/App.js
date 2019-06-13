@@ -1,5 +1,5 @@
 import React from "react";
-import Articles from "./Article";
+import ArticleList from "./ArticleList";
 
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
@@ -20,7 +20,6 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
@@ -169,7 +168,6 @@ export default function App() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -211,7 +209,7 @@ export default function App() {
           <Grid container>
             <Grid item xs={12}>
               <Paper>
-                <Articles/>
+                <ArticleList/>
               </Paper>
             </Grid>
           </Grid>
