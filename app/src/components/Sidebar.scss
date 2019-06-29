@@ -1,0 +1,29 @@
+.items {
+  list-style-type: none;
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+  margin: 0;
+  &:last-child {
+    border-bottom: none;
+  }
+  > .item > a {
+    line-height: 1.8;
+    display: flex;
+    color: #666666;
+    white-space: nowrap;
+    padding: 8px 27px 5px 0;
+    border-radius: 50px 0 0 50px;
+    &.active {
+      background-color: #dde1f9;
+      font-weight: bold;
+      color: #3f51b5;
+    }
+    &:hover {
+      color: #3f51b5;
+      text-decoration: none;
+    }
+    > i {
+      padding-left: 0.8rem;
+    }
+  }
+}

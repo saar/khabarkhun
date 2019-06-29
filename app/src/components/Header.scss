@@ -1,0 +1,80 @@
+header {
+  &.header {
+    background: #fff;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    height: 60px;
+    z-index: 1030;
+    border-bottom: 1px solid #c2c2c2;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.14);
+    > .brand {
+      display: flex;
+      align-items: center;
+      > .sidebar-btn {
+        color: #757575;
+        border-radius: 50%;
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+        cursor: pointer;
+        &:hover {
+          background-color: #3c404314;
+          outline: none;
+        }
+        > i {
+          font-size: 1.6rem;
+          position: relative;
+          top: 10px;
+          left: -10px;
+        }
+      }
+      > a.brand-link {
+        display: inline-block;
+        padding: 0;
+        margin-right: 0.3rem;
+        font-size: 1.25rem;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      > a > img.logo {
+        vertical-align: middle;
+        height: 50px;
+        padding-left: 0.6rem;
+      }
+      > a > img.logotype {
+        vertical-align: middle;
+        height: 26px;
+        margin-top: 3px;
+      }
+      > .brand-subtitle {
+        color: #484848;
+        font-size: 0.9rem;
+        padding: 0.5rem 0;
+        margin-right: 0.5rem;
+      }
+      > .beta {
+        color: #e91e63;
+        font-size: 0.7rem;
+        padding-right: 0.2rem;
+      }
+    }
+    > .links {
+      display: flex;
+      flex-direction: row;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      > .link-item {
+        padding: 0;
+        margin-left: 1rem;
+        &:last-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

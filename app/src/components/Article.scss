@@ -1,0 +1,46 @@
+.post {
+  overflow: hidden;
+  .title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: block;
+  }
+  .summary {
+    margin: 0.5rem 0;
+  }
+  .source {
+    margin-bottom: 0;
+    font-size: .8rem;
+    color: #757575;
+  }
+  .post-image {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    .image{
+      height: 100px;
+      width: auto;
+      position: relative;
+    }
+  }
+  a.title {
+    &:visited {
+      color: #64b5f6;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .post .post-image{
+    width: 72px;
+    height: 72px;
+    .image{
+      height: 72px;
+    }
+  }
+}

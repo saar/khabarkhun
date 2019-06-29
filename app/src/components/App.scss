@@ -1,0 +1,64 @@
+/* general */
+a {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+  &:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  &:active {
+    color: #004fa3;
+  }
+  &:visited {
+    color: #0051a8;
+  }
+}
+
+/* app */
+#root {
+  > .wrapper {
+    display: flex;
+    align-items: stretch;
+    .main-wrapper {
+      width: 100%;
+      padding: 1rem;
+      transition: all 0.3s;
+    }
+    .sidebar-wrapper {
+      width: 230px;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+      transform: translateX(0);
+      transition: transform 0.3s;
+      z-index: 1030;
+      &.hide {
+        position: fixed;
+        transform: translateX(240px);
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  #root > .wrapper .main-wrapper,
+  #root > .wrapper > .main-wrapper > main > div > div.col {
+    padding: 0;
+  }
+  #root > .wrapper .sidebar-wrapper {
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.28);
+    position: fixed;
+    .items > .item > a {
+      border-radius: 0;
+    }
+  }
+}
