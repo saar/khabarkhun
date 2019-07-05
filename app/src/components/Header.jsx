@@ -3,28 +3,16 @@ import { Link } from "react-router-dom";
 import logo from "./logo.svg";
 import logoType from "./logotype.svg";
 import "./Header.scss";
-
-
-const toggleSidebar = () => {
-  if (!this.state.isSidebar && window.innerWidth < 768)
-    document.addEventListener("click", this.hide);
-  else document.removeEventListener("click", this.hide);
-
-  this.setState({isSidebar: !this.state.isSidebar});
-};
+import {connect} from "react-redux";
+import {toggleSidebar} from "../actions";
 
 class Header extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {isSidebar:true};
-  }
 
   render() {
     return (
       <header className="header">
         <div className="brand">
-          <div className="sidebar-btn" onClick={toggleSidebar}>
+          <div className="sidebar-btn" onClick={() => this.props.toggleSidebar()}>
             <i className="material-icons">menu</i>
           </div>
           <Link className="brand-link" to="/">
@@ -40,4 +28,5 @@ class Header extends Component {
     );
   }
 }
-export default Header;
+
+export default connect(null,{toggleSidebar})(Header);

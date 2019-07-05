@@ -15,21 +15,22 @@ export class ArticleList extends Component {
   componentDidUpdate(prevProps) {
     const newParameters = this.props.location.search;
     const newPathName = this.props.location.pathname;
-    if (newParameters !== prevProps.location.search && (newPathName === "/article" || newPathName === "/")) {
+    if (newParameters !== prevProps.location.search && (newPathName === "/pwa" || newPathName === "/")) {
+
       this.props.articlesRequested(newParameters);
-      console.log("didUpdate", newParameters);
+      // console.log("didUpdate", newParameters);
     }
-    console.log("newParameters",newParameters);
-    console.log("prevProps.location.search", prevProps.location.search );
+    // console.log("newParameters",newParameters);
+    // console.log("prevProps.location.search", prevProps.location.search );
   }
 
   componentWillUnmount() {
-    console.log("removeEventListener");
+    // console.log("removeEventListener");
     window.removeEventListener('scroll', this.handleOnScroll);
   }
 
   handleOnScroll = () => {
-    console.log("handleOnScroll");
+    // console.log("handleOnScroll");
     let scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
     let scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
     let clientHeight = document.documentElement.clientHeight || window.innerHeight;

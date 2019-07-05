@@ -1,5 +1,12 @@
 import {takeEvery, call, put} from "redux-saga/effects";
-import  {ARTICLES_REQUESTED, ARTICLES_LOADED, ARTICLE_REQUESTED, ARTICLE_LOADED, API_ERRORED} from "../constants/action-types";
+import {
+  ARTICLES_REQUESTED,
+  ARTICLES_LOADED,
+  ARTICLE_REQUESTED,
+  ARTICLE_LOADED,
+  API_ERRORED,
+  REQUEST_SEND
+} from "../constants/action-types";
 
 export default function* articleWatch() {
   yield takeEvery(ARTICLE_REQUESTED, fetchArticle);
@@ -17,6 +24,8 @@ function* fetchArticle(action) {
 
 function* fetchArticles(action) {
   try {
+    const payloadRequest = true;
+    yield put({type: REQUEST_SEND, payloadRequest});
     const payload = yield call(getArticles,{params: action.payload});
     yield put({type: ARTICLES_LOADED, payload});
   } catch (e) {
@@ -25,13 +34,13 @@ function* fetchArticles(action) {
 }
 
  const getArticle = (params) => {
-  return fetch(`http://198.23.143.225:9090/api/article/${params.id}`).then(response =>
+  return fetch(`/api/article/${params.id}`).then(response =>
     response.json()
   );
 }
 function getArticles(params) {
-  console.log("params.params: "+ params.params);
-  return fetch(`http://198.23.143.225:9090/api/article/${params.params}`).then(response =>
+  // console.log("params.params: "+ params.params);
+  return fetch(`/api/article/${params.params}`).then(response =>
     response.json()
   );
 }
