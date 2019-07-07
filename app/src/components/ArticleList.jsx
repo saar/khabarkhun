@@ -17,7 +17,6 @@ export class ArticleList extends Component {
     const newParameters = this.props.location.search;
     const newPathName = this.props.location.pathname;
     if (newParameters !== prevProps.location.search && (newPathName === "/pwa" || newPathName === "/article/category" || newPathName === "/")) {
-      console.log("cdu-newParameters",newParameters)
       this.props.articlesRequested(newParameters);
     }
   }

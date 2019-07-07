@@ -29,7 +29,7 @@ const App = (props) => {
           <main className="container">
             <Switch>
               <Route exact path="/article/category/:category" component={ArticleList}/>
-              {/*<Route exact path="/article/:id" component={ArticlePage}/>*/}
+              <Route exact path="/article/:id" component={ArticlePage}/>
               <Route exact path="/" component={ArticleList}/>
               <Route exact path="/pwa" component={ArticleList}/>
               <Route exact path="/article" component={ArticleList}/>
