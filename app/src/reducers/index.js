@@ -18,7 +18,10 @@ function rootReducer(state = initialState, action) {
       };
     case REQUEST_SEND:
       return Object.assign({}, state, {
-        requestSent: true
+        article: state.article,
+        articles: state.articles,
+        requestSent: true,
+        isSidebar: state.isSidebar
       });
     case ARTICLES_LOADED:
       return Object.assign({}, state, {
@@ -31,7 +34,7 @@ function rootReducer(state = initialState, action) {
       return Object.assign({}, state, {
         article: state.article,
         articles: state.articles,
-        requestSent: true,
+        requestSent: state.requestSent,
         isSidebar: !state.isSidebar
       });
     default:
