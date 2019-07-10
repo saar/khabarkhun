@@ -47,6 +47,14 @@
             "type": "integer"
           },
           "in": "query"
+        },
+        {
+          "name": "search",
+          "description": "search term",
+          "schema": {
+            "type": "string"
+          },
+          "in": "query"
         }
       ]
     },
@@ -260,7 +268,6 @@
           "400": {
             "content": {
               "Error": {
-
               }
             },
             "description": "Please provide a valid RSS URL."

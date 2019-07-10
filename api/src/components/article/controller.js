@@ -6,8 +6,11 @@ const logger = require('../../utils/logger');
 
 const getArticles = async (req, res, next) => {
     let perPage = 30
-        , page = Math.max(0, parseInt(req.params.p));
-    const articles = await Article.find({}).limit(perPage).sort('-publicationDate').skip(perPage * page);
+        , page = Math.max(0, parseInt(req.query.p));
+    const articles = await Article.find(!!req.query.search ?
+        {$text: {$search: req.query.search}} :
+        {}
+    ).limit(perPage).sort('-publicationDate').skip(perPage * page);
 
     if (articles)
         res.json(articles);
@@ -58,11 +61,11 @@ const likeArticle = async (req, res, next) => {
 };
 const countArticleLikes = async (req, res, next) => {
     const article = await Article.findById(req.params.id);
-    res.json(article.likeCount);
+    res.json({like: article.likeCount, dislike: article.dislikeCount});
 };
 const dislikeArticle = async (req, res, next) => {
     const article = await Article.decLikeCount(req.params.id);
-    res.json(article.likeCount);
+    res.json(article.dislikeCount);
 };
 const visitArticle = async (req, res, next) => {
     const article = await Article.incrVisitCount(req.params.id);

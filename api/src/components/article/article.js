@@ -83,17 +83,21 @@ const ArticleSchema = new mongoose.Schema(
 			trim: true,
 			required: true,
 			index: true,
+			text: true,
+
 		},
 		description: {
 			type: String,
 			trim: true,
 			maxLength: 240,
 			default: '',
+            text: true,
 		},
 		content: {
 			type: String,
 			trim: true,
 			default: '',
+            text: true,
 		},
 		commentUrl: {
 			type: String,
@@ -132,10 +136,6 @@ const ArticleSchema = new mongoose.Schema(
 		enclosures: [EnclosureSchema],
 		tags: [String],
 		categories: [String],
-		likes: {
-			type: Number,
-			default: 0,
-		},
 		socialScore: {
 			reddit: {
 				type: Number,
@@ -158,6 +158,10 @@ const ArticleSchema = new mongoose.Schema(
 			default: 0,
 		},
 		likeCount: {
+			type: Number,
+			default: 0,
+		},
+		dislikeCount: {
 			type: Number,
 			default: 0,
 		},
@@ -220,7 +224,7 @@ ArticleSchema.statics.decVisitCount = async function(id) {
 ArticleSchema.statics.decLikeCount = async function(id) {
 	return await this.findOneAndUpdate(
 		{ _id: id },
-		{ $inc: { likeCount: -1 } }, {new: true}
+		{ $inc: { dislikeCount: -1 } }, {new: true}
 	).exec();
 };
 
@@ -241,6 +245,7 @@ ArticleSchema.plugin(autopopulate);
 ArticleSchema.index({ rss: 1, fingerprint: 1 }, { unique: true });
 ArticleSchema.index({ rss: 1, publicationDate: -1 });
 ArticleSchema.index({ publicationDate: -1 });
+ArticleSchema.index({'fullContent.content': 'text'});
 //
 // ArticleSchema.methods.getUrl = function() {
 // 	return getUrl('article_detail', this.rss._id, this._id);
