@@ -34,13 +34,13 @@ function* fetchArticles(action) {
 }
 
  const getArticle = (params) => {
-  return fetch(`/api/article/${params.id}`).then(response =>
+  return fetch(`https://www.khabarkhun.ir/api/article/${params.id}`).then(response =>
     response.json()
   );
 }
 function getArticles(params) {
   // console.log("params.params: "+ params.params);
-  return fetch(`/api/article/${params.params}`).then(response =>
+  return fetch(`https://www.khabarkhun.ir/api/article/${params.params}`).then(response =>
     response.json()
   );
 }
