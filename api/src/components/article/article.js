@@ -198,29 +198,29 @@ ArticleSchema.statics.incrScrapeFailures = async function(id) {
 	).exec();
 };
 ArticleSchema.statics.incrVisitCount = async function(id) {
-	await this.findOneAndUpdate(
+	return await this.findOneAndUpdate(
 		{ _id: id },
-		{ $inc: { visitCount: 1 } },
+		{ $inc: { visitCount: 1 } }, {new: true}
 	).exec();
 };
 
 ArticleSchema.statics.incrLikeCount = async function(id) {
-	await this.findOneAndUpdate(
+	return await this.findOneAndUpdate(
 		{ _id: id },
-		{ $inc: { likeCount: 1 } },
+		{ $inc: { likeCount: 1 } }, {new: true}
 	).exec();
 };
 ArticleSchema.statics.decVisitCount = async function(id) {
-	await this.findOneAndUpdate(
+	return await this.findOneAndUpdate(
 		{ _id: id },
-		{ $inc: { visitCount: 1 } },
+		{ $inc: { visitCount: -1 } }, {new: true}
 	).exec();
 };
 
 ArticleSchema.statics.decLikeCount = async function(id) {
-	await this.findOneAndUpdate(
+	return await this.findOneAndUpdate(
 		{ _id: id },
-		{ $inc: { likeCount: 1 } },
+		{ $inc: { likeCount: -1 } }, {new: true}
 	).exec();
 };
 

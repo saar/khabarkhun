@@ -2,6 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Khabarkhun",
+    "version": "1.0.0",
     "description": "Khabarkhun api document.",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
@@ -12,8 +13,7 @@
     "license": {
       "name": "GNU GPLv3",
       "url": "https://www.gnu.org/licenses/gpl.txt"
-    },
-    "version": "1.0.0"
+    }
   },
   "servers": [
     {
@@ -25,7 +25,6 @@
       "get": {
         "responses": {
           "200": {
-            "description": "Return must recent articles",
             "content": {
               "application/json": {
                 "schema": {
@@ -35,18 +34,19 @@
                   }
                 }
               }
-            }
+            },
+            "description": "Return must recent articles"
           }
         }
       },
       "parameters": [
         {
           "name": "p",
-          "in": "query",
           "description": "Page Number",
           "schema": {
             "type": "integer"
-          }
+          },
+          "in": "query"
         }
       ]
     },
@@ -55,24 +55,24 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
             "description": "Article ID",
-            "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
           "200": {
-            "description": "Get article by id",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Article"
                 }
               }
-            }
+            },
+            "description": "Get article by id"
           }
         }
       }
@@ -81,7 +81,6 @@
       "get": {
         "responses": {
           "200": {
-            "description": "Get comments fonr an article",
             "content": {
               "application/json": {
                 "schema": {
@@ -91,7 +90,8 @@
                   }
                 }
               }
-            }
+            },
+            "description": "Get comments fonr an article"
           }
         }
       },
@@ -108,36 +108,36 @@
         },
         "responses": {
           "201": {
-            "description": "Comment addee successfully.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Comment"
                 }
               }
-            }
+            },
+            "description": "Comment addee successfully."
           },
           "400": {
-            "description": "Invalid comment.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Invalid comment."
           }
         }
       },
       "parameters": [
         {
           "name": "id",
-          "in": "path",
           "description": "Article ID",
-          "required": true,
           "schema": {
             "type": "string"
-          }
+          },
+          "in": "path",
+          "required": true
         }
       ]
     },
@@ -146,25 +146,24 @@
         "parameters": [
           {
             "name": "p",
-            "in": "query",
             "description": "page number",
-            "required": false,
             "schema": {
               "type": "integer"
-            }
+            },
+            "in": "query",
+            "required": false
           },
           {
             "name": "category",
-            "in": "path",
-            "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
           "200": {
-            "description": "Get articles for specefic category.",
             "content": {
               "application/json": {
                 "schema": {
@@ -174,18 +173,19 @@
                   }
                 }
               }
-            }
+            },
+            "description": "Get articles for specefic category."
           }
         }
       },
       "parameters": [
         {
           "name": "category",
-          "in": "path",
-          "required": true,
           "schema": {
             "type": "string"
-          }
+          },
+          "in": "path",
+          "required": true
         }
       ]
     },
@@ -194,25 +194,24 @@
         "parameters": [
           {
             "name": "p",
-            "in": "query",
             "description": "page number",
-            "required": false,
             "schema": {
               "type": "integer"
-            }
+            },
+            "in": "query",
+            "required": false
           },
           {
             "name": "tag",
-            "in": "path",
-            "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
           "200": {
-            "description": "Get articles by tag",
             "content": {
               "application/json": {
                 "schema": {
@@ -222,7 +221,8 @@
                   }
                 }
               }
-            }
+            },
+            "description": "Get articles by tag"
           }
         }
       }
@@ -231,37 +231,39 @@
       "post": {
         "requestBody": {
           "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/RSS"
-                            },
-                            "examples": {
-                                "varzesh3.com": {
-                                    "value": {
-                                        "feedUrl": "http://varzesh3.com"
-                                    }
-                                }
-                            }
-                        }
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RSS"
+              },
+              "examples": {
+                "varzesh3.com": {
+                  "value": {
+                    "feedUrl": "https://www.varzesh3.com/rss/all"
+                  }
+                }
+              }
+            }
           },
           "required": true
         },
         "responses": {
           "200": {
-            "description": "Add an RSS feed",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RSS"
                 }
               }
-            }
+            },
+            "description": "Add an RSS feed"
           },
           "400": {
-            "description": "Please provide a valid RSS URL.",
             "content": {
-              "Error": {}
-            }
+              "Error": {
+
+              }
+            },
+            "description": "Please provide a valid RSS URL."
           }
         }
       }
@@ -277,126 +279,126 @@
       "parameters": [
         {
           "name": "rss",
-          "in": "path",
-          "required": true,
           "schema": {
             "type": "string"
-          }
-        }
-      ]
-    },
-    "/article/{id}/like/": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Likes count of article",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "summary": "Like Article",
-        "responses": {
-          "200": {
-            "description": "Liked",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Dislike Article",
-        "responses": {
-          "200": {
-            "description": "Disliked and return likes count",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "id",
+          },
           "in": "path",
-          "description": "Article ID",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "required": true
         }
       ]
     },
     "/article/{id}/visit/": {
       "get": {
-        "summary": "Seen an article",
         "responses": {
           "200": {
-            "description": "count of visits",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "integer"
                 }
               }
-            }
+            },
+            "description": "count of visits"
           }
-        }
+        },
+        "summary": "return article visit's count"
       },
       "put": {
-        "summary": "Seen Article",
         "responses": {
           "200": {
-            "description": "Liked",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "integer"
                 }
               }
-            }
+            },
+            "description": "Liked"
           }
-        }
+        },
+        "summary": "Seen Article"
       },
       "delete": {
-        "summary": "Unseen article",
         "responses": {
           "200": {
-            "description": "Mark as unseened and return seens count",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "integer"
                 }
               }
-            }
+            },
+            "description": "Mark as unseened and return seens count"
           }
-        }
+        },
+        "summary": "Unseen article"
       },
       "parameters": [
         {
           "name": "id",
-          "in": "path",
           "description": "Article ID",
-          "required": true,
           "schema": {
             "type": "string"
+          },
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/article/{id}/like": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "Likes count of article"
           }
+        }
+      },
+      "put": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "Liked"
+          }
+        },
+        "summary": "Like Article"
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "description": "Disliked and return likes count"
+          }
+        },
+        "summary": "Dislike Article"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "description": "Article ID",
+          "schema": {
+            "type": "string"
+          },
+          "in": "path",
+          "required": true
         }
       ]
     }
@@ -703,8 +705,8 @@
     },
     "securitySchemes": {
       "securityScheme": {
-        "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "type": "http"
       }
     }
   }
