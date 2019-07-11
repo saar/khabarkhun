@@ -6,7 +6,7 @@ const logger = require('../logger');
 mongoose.Promise = global.Promise;
 
 const connection = mongoose.connect(config.database.uri, {
-	autoIndex: true,
+	autoIndex: false,
 	reconnectTries: Number.MAX_VALUE,
 	reconnectInterval: 500,
 	poolSize: 50,

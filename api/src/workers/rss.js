@@ -61,8 +61,7 @@ const joiObjectId = joi.alternatives().try(
 	joi.string().length(12),
 	joi.string().length(24).regex(/^[0-9a-fA-F]{24}$/),
 );
-const joiUrl = joi.string().
-	uri({ scheme: ['http', 'https'], allowQuerySquareBrackets: true });
+const joiUrl = joi.string().uri({ scheme: ['http', 'https'], allowQuerySquareBrackets: true });
 
 const schema = joi.object().keys({
 	rss: joiObjectId.required(),
@@ -184,8 +183,7 @@ async function handleRSS(job) {
 	logger.debug(`Starting the upsertManyPosts for RSS with ID ${rssID}`);
 	const operationMap = await upsertManyPosts(rssID, rssContent.articles,
 		'rss');
-	const updatedArticles = operationMap.new.concat(operationMap.changed).
-		filter((a) => !!a.url);
+	const updatedArticles = operationMap.new.concat(operationMap.changed).filter((a) => !!a.url);
 	logger.info(
 		`Finished updating. ${updatedArticles.length} out of ${ rssContent.articles.length } changed for RSS with ID ${rssID}`,
 	);
@@ -199,7 +197,7 @@ async function handleRSS(job) {
 		`marked ${ updated.filter(
 			(u) => !!u).length } of articles as isParsing`);
 	logger.debug(`updated ${JSON.stringify(updated)}`);
-	
+
 	await Promise.all(
 		updatedArticles.map((article) => {
 			const job = {

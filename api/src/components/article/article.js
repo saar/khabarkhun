@@ -82,8 +82,6 @@ const ArticleSchema = new mongoose.Schema(
 			type: String,
 			trim: true,
 			required: true,
-			index: true,
-			text: true,
 
 		},
 		description: {
@@ -91,13 +89,11 @@ const ArticleSchema = new mongoose.Schema(
 			trim: true,
 			maxLength: 240,
 			default: '',
-            text: true,
 		},
 		content: {
 			type: String,
 			trim: true,
 			default: '',
-            text: true,
 		},
 		commentUrl: {
 			type: String,
@@ -204,27 +200,27 @@ ArticleSchema.statics.incrScrapeFailures = async function(id) {
 ArticleSchema.statics.incrVisitCount = async function(id) {
 	return await this.findOneAndUpdate(
 		{ _id: id },
-		{ $inc: { visitCount: 1 } }, {new: true}
+		{ $inc: { visitCount: 1 } }, { new: true },
 	).exec();
 };
 
 ArticleSchema.statics.incrLikeCount = async function(id) {
 	return await this.findOneAndUpdate(
 		{ _id: id },
-		{ $inc: { likeCount: 1 } }, {new: true}
+		{ $inc: { likeCount: 1 } }, { new: true },
 	).exec();
 };
 ArticleSchema.statics.decVisitCount = async function(id) {
 	return await this.findOneAndUpdate(
 		{ _id: id },
-		{ $inc: { visitCount: -1 } }, {new: true}
+		{ $inc: { visitCount: -1 } }, { new: true },
 	).exec();
 };
 
 ArticleSchema.statics.decLikeCount = async function(id) {
 	return await this.findOneAndUpdate(
 		{ _id: id },
-		{ $inc: { dislikeCount: -1 } }, {new: true}
+		{ $inc: { dislikeCount: -1 } }, { new: true },
 	).exec();
 };
 
@@ -245,7 +241,19 @@ ArticleSchema.plugin(autopopulate);
 ArticleSchema.index({ rss: 1, fingerprint: 1 }, { unique: true });
 ArticleSchema.index({ rss: 1, publicationDate: -1 });
 ArticleSchema.index({ publicationDate: -1 });
-ArticleSchema.index({'fullContent.content': 'text'});
+ArticleSchema.index({
+		'fullContent.content': 'text',
+		'title': 'text',
+		'content': 'text',
+		'description': 'text',
+	},
+	{
+		weights: {
+			'title': 3,
+			'description': 2,
+		},
+		name: 'SearchIndex',
+	});
 //
 // ArticleSchema.methods.getUrl = function() {
 // 	return getUrl('article_detail', this.rss._id, this._id);
@@ -305,5 +313,13 @@ ArticleSchema.methods.getParsedArticle = async function(force = false) {
 };
 
 let Article = mongoose.model('Article', ArticleSchema);
+(async () => {
+	try {
+		await Article.syncIndexes();
+	} catch (e) {
+		console.log(e);
+	}
+})();
+
 module.exports = exports = Article;
 module.exports.ArticleSchema = ArticleSchema;
