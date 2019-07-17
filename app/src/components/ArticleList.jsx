@@ -1,4 +1,4 @@
-import React, {Component } from "react";
+import React, {Component} from "react";
 import {connect} from "react-redux";
 import {articlesRequested} from "../actions/index";
 import Article from "./Article";
@@ -8,7 +8,6 @@ export class ArticleList extends Component {
 
   componentDidMount() {
     const newParameters = this.props.location.search || "";
-    console.log("cdm-newParameters",newParameters)
     this.props.articlesRequested(newParameters);
     window.addEventListener('scroll', this.handleOnScroll);
   }
@@ -16,7 +15,7 @@ export class ArticleList extends Component {
   componentDidUpdate(prevProps) {
     const newParameters = this.props.location.search;
     const newPathName = this.props.location.pathname;
-    if (newParameters !== prevProps.location.search && (newPathName === "/pwa" || newPathName === "/article/category" || newPathName === "/")) {
+    if (newParameters !== prevProps.location.search && (newPathName === "/pwa" || newPathName === "/")) {
       this.props.articlesRequested(newParameters);
     }
   }
@@ -32,7 +31,7 @@ export class ArticleList extends Component {
     let scrolledToBottom = Math.ceil(scrollTop + clientHeight + 1000) >= scrollHeight;
 
     if (scrolledToBottom) {
-      if (this.props.requestSent) {
+      if (this.props.requestSend) {
         return;
       }
       let parameters = this.getPage();
@@ -43,31 +42,25 @@ export class ArticleList extends Component {
   getPage = () => {
     let {pathname, search} = this.props.location;
     let pageNo = 0;
-    let category;
     let patternNo = /p=(\d+)/i;
-    let patternWord = /category=(\w+)/i;
     let match = patternNo.exec(search);
     if (match) {
       pageNo = match[1];
     }
-    match = patternWord.exec(search);
-    if (match) {
-      category = match[1];
-    }
     pageNo++;
-    return (category) ? (pathname + `?category=${category}&p=${pageNo}&continue=true`) : (pathname + `?p=${pageNo}&continue=true`);
+    return (`${pathname}?p=${pageNo}&continue=true`);
   };
 
   render() {
     const getLoading = () => {
-    if (this.props.requestSent) {
-      return (
-        <div className="data-loading">
-          <i className="fa fa-circle-o-notch fa-spin fa-4x"/>
-        </div>
-      );
-    }
-  };
+      if (this.props.requestSend) {
+        return (
+          <div className="data-loading">
+            <i className="fa fa-circle-o-notch fa-spin fa-4x"/>
+          </div>
+        );
+      }
+    };
     return (
       <div className="p-3 rounded">
         <div className="header">
@@ -92,7 +85,7 @@ export class ArticleList extends Component {
 function mapStateToProps(state) {
   return {
     articles: state.articles,
-    requestSent: state.requestSent
+    requestSend: state.requestSend
   };
 }
 

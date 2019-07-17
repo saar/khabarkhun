@@ -1,13 +1,13 @@
 import React from "react";
+import {connect} from "react-redux";
 import className from "classnames";
-import ArticleList from "./ArticleList";
+import ArticleList from "../ArticleList";
 import {Route, Switch} from "react-router-dom";
-import sidebarItems from "./sidebarItems.json";
-import ArticlePage from "./ArticlePage";
-import Sidebar from "./Sidebar";
-import Header from "./Header";
+import sidebarItems from "../Sidebar/sidebarItems.json";
+import ArticlePage from "../ArticlePage";
+import Sidebar from "../Sidebar/Sidebar";
+import Header from "../Header/Header";
 import "./App.scss";
-import connect from "react-redux/es/connect/connect";
 
 const App = (props) => {
   let sidebarClassName = className({

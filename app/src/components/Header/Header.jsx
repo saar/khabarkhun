@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import logo from "./logo.svg";
 import logoType from "./logotype.svg";
 import "./Header.scss";
 import {connect} from "react-redux";
-import {toggleSidebar} from "../actions";
+import {toggleSidebar} from "../../actions";
 
 
 const Header = (props) => {
@@ -27,4 +27,4 @@ const Header = (props) => {
   );
 };
 
-export default connect(null,{toggleSidebar})(Header);
+export default connect(null, {toggleSidebar})(Header);

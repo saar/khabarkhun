@@ -15,7 +15,7 @@ export default function* articleWatch() {
 
 function* fetchArticle(action) {
   try {
-    const payload = yield call(getArticle,{ id: action.payload});
+    const payload = yield call(getArticle, {id: action.payload});
     yield put({type: ARTICLE_LOADED, payload});
   } catch (e) {
     yield put({type: API_ERRORED, payload: e});
@@ -24,23 +24,25 @@ function* fetchArticle(action) {
 
 function* fetchArticles(action) {
   try {
-    const payloadRequest = true;
+    let payloadRequest = true;
     yield put({type: REQUEST_SEND, payloadRequest});
-    const payload = yield call(getArticles,{params: action.payload});
+    let payload = yield call(getArticles, {params: action.payload});
+    payloadRequest = false;
+    yield put({type: REQUEST_SEND, payloadRequest});
     yield put({type: ARTICLES_LOADED, payload});
   } catch (e) {
     yield put({type: API_ERRORED, payload: e});
   }
 }
 
- const getArticle = (params) => {
-  return fetch(`https://www.khabarkhun.ir/api/article/${params.id}`).then(response =>
+const getArticle = (params) => {
+  return fetch(`/api/article/${params.id}`).then(response =>
     response.json()
   );
-}
+};
+
 function getArticles(params) {
-  // console.log("params.params: "+ params.params);
-  return fetch(`https://www.khabarkhun.ir/api/article/${params.params}`).then(response =>
+  return fetch(`/api/article/${params.params}`).then(response =>
     response.json()
   );
 }

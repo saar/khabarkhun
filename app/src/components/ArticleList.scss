@@ -17,7 +17,7 @@
 }
 
 /* loading */
-.data-loading{
+.data-loading {
   color: #e91e63;
   text-align: center;
 }
@@ -65,8 +65,10 @@
 @media (max-width: 767.98px) {
   .header {
     .title {
-      > i.material-icons {font-size: 1.3rem}
-      h2{
+      > i.material-icons {
+        font-size: 1.3rem
+      }
+      h2 {
         font-size: 1.2rem;
         padding-top: .6rem;
       }

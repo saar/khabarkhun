@@ -33,7 +33,7 @@ class ArticlePage extends Component {
               <span>{moment(article.publicationDate).fromNow()}</span>
               <div className="pull-left block">
                 <span>{Number.parseInt(article.visitCount) + " بازدید - "}</span>
-{/*                <a
+                {/*                <a
                   className="pr-1"
                   href={article.url}
                   rel="noopener noreferrer"
@@ -44,8 +44,8 @@ class ArticlePage extends Component {
               </div>
             </div>
             <p>{article.description}</p>
-            {(article.fullContent)  &&
-              <div
+            {(article.fullContent) &&
+            <div
               className="content "
               dangerouslySetInnerHTML={{__html: article.fullContent.content}}
             />}

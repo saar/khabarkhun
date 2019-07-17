@@ -4,55 +4,55 @@
     "text": "آخرین اخبار",
     "to": "/",
     "icon": "alarm",
-    "bg-color":"#123456"
+    "bg-color": "#123456"
   },
   {
     "_id": "4",
     "text": "جهان",
-    "to": "/?category=بین‌الملل",
+    "to": "/article/category/بین‌الملل",
     "icon": "public",
-    "bgColor":"#123456"
+    "bgColor": "#123456"
   },
   {
     "_id": "5",
     "text": "سیاست",
     "to": "/?category=politic",
     "icon": "account_balance",
-    "bgColor":"#123456"
+    "bgColor": "#123456"
   },
   {
     "_id": "6",
     "text": "اقتصاد",
     "to": "/?category=economic",
     "icon": "monetization_on",
-    "bgColor":"#123456"
+    "bgColor": "#123456"
   },
   {
     "_id": "7",
     "text": "فرهنگ و هنر",
     "to": "/?category=culture",
     "icon": "palette",
-    "bgColor":"#123456"
+    "bgColor": "#123456"
   },
   {
     "_id": "8",
     "text": "ورزشی",
     "to": "/?category=sport",
     "icon": "directions_bike",
-    "bgColor":"#123456"
+    "bgColor": "#123456"
   },
   {
     "_id": "9",
     "text": "جامعه",
     "to": "/?category=social",
     "icon": "gavel",
-    "bgColor":"#123456"
+    "bgColor": "#123456"
   },
   {
     "_id": "10",
     "text": "عکس و فیلم",
     "to": "/?category=media",
     "icon": "insert_photo",
-    "bgColor":"#123456"
+    "bgColor": "#123456"
   }
 ]
