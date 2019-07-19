@@ -1,4 +1,14 @@
-import {ARTICLE_REQUESTED, ARTICLES_REQUESTED, TOGGLE_SIDEBAR} from '../constants/action-types'
+import {
+  ARTICLE_REQUESTED,
+  ARTICLES_REQUESTED,
+  TOGGLE_SIDEBAR,
+  ARTICLES_CATEGORY_REQUESTED
+} from '../constants/action-types'
+
+export function articlesCategoryRequested(category,params) {
+  return {type: ARTICLES_CATEGORY_REQUESTED, payload: {category,params}};
+}
+
 
 export function articleRequested(id) {
   return {type: ARTICLE_REQUESTED, payload: id};
