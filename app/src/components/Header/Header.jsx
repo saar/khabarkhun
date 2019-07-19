@@ -14,7 +14,7 @@ const Header = (props) => {
         <div className="sidebar-btn" onClick={() => props.toggleSidebar()}>
           <i className="material-icons">menu</i>
         </div>
-        <Link className="brand-link" to="/">
+        <Link className="brand-link" to="/"  onClick={()=>{window.scrollTo(0, 0);}}>
           <img className="logo" src={logo} alt="خبرخون"/>
           <img className="logotype" src={logoType} alt="خبرخون"/>
         </Link>

@@ -24,11 +24,11 @@ function* fetchArticle(action) {
 
 function* fetchArticles(action) {
   try {
-    let payloadRequest = true;
-    yield put({type: REQUEST_SEND, payloadRequest});
-    let payload = yield call(getArticles, {params: action.payload});
-    payloadRequest = false;
-    yield put({type: REQUEST_SEND, payloadRequest});
+    yield put({type: REQUEST_SEND, payload:true});
+    let data = yield call(getArticles, {params: action.payload});
+    let reset = !action.payload;
+    let payload = {data, reset};
+    yield put({type: REQUEST_SEND, payload:false});
     yield put({type: ARTICLES_LOADED, payload});
   } catch (e) {
     yield put({type: API_ERRORED, payload: e});

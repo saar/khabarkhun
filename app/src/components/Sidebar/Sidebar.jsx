@@ -8,7 +8,7 @@ const Sidebar = ({items}) => {
       {items.map(item => (
         <li key={item._id} className="item">
           <NavLink
-            exact
+            exact onClick={()=>{window.scrollTo(0, 0);}}
             className="link"
             to={item.to}
           >

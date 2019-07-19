@@ -16,42 +16,42 @@
   {
     "_id": "5",
     "text": "سیاست",
-    "to": "/?category=politic",
+    "to": "/article/category/سیاسی",
     "icon": "account_balance",
     "bgColor": "#123456"
   },
   {
     "_id": "6",
     "text": "اقتصاد",
-    "to": "/?category=economic",
+    "to": "/article/category/اقتصادی",
     "icon": "monetization_on",
     "bgColor": "#123456"
   },
   {
     "_id": "7",
     "text": "فرهنگ و هنر",
-    "to": "/?category=culture",
+    "to": "/article/category/فرهنگی هنری",
     "icon": "palette",
     "bgColor": "#123456"
   },
   {
     "_id": "8",
     "text": "ورزشی",
-    "to": "/?category=sport",
+    "to": "/article/category/ورزشی",
     "icon": "directions_bike",
     "bgColor": "#123456"
   },
   {
     "_id": "9",
     "text": "جامعه",
-    "to": "/?category=social",
+    "to": "/article/category/اجتماعی",
     "icon": "gavel",
     "bgColor": "#123456"
   },
   {
     "_id": "10",
     "text": "عکس و فیلم",
-    "to": "/?category=media",
+    "to": "/article/category/فیلم و صوت",
     "icon": "insert_photo",
     "bgColor": "#123456"
   }

@@ -39,11 +39,11 @@ export default function Article({article}) {
         {article.description && <p className="summary d-none d-sm-inline-block">
           {article.description}
         </p>}
-        <div>
+{/*        <div>
           <label>{parseInt(article.likeCount) === 0 ? "" : article.likeCount}</label>
           <i className="material-icons">thumb_up</i>
           <i className="material-icons">thumb_down</i>
-        </div>
+        </div>*/}
       </div>
       {getImage(image, article.title)}
     </div>
