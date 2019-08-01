@@ -1,26 +1,21 @@
-import React from 'react';
-import './App.css';
 
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 
-import {AppState} from './store'
-import {connect} from "react-redux";
+import store, { history } from './store';
+// import Home from './routes/Home';
 
-const mapStateToProps = (state: AppState) => ({
-    system: state.system,
-    chat: state.chat
-});
-
-
-interface AppProps {
-    sendMessage: typeof sendMessage
-    updateSession: typeof updateSession
-    chat: ChatState
-    system: SystemState
+class App extends Component {
+    render() {
+        return (
+            <Provider store={store}>
+                <ConnectedRouter history={history}>
+                    {/*<Home />*/}
+                </ConnectedRouter>
+            </Provider>
+        );
+    }
 }
 
-class App extends React.Component<AppProps> {
-￼
-}
-
-export default connect(mapStateToProps)(App);
-￼
+export default App;

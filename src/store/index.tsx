@@ -1,0 +1,45 @@
+import {applyMiddleware, createStore} from 'redux';
+import {createBrowserHistory} from 'history';
+import {routerMiddleware as createRouterMiddleware} from 'connected-react-router';
+import createSagaMiddleware from 'redux-saga'
+import {composeEnhancers} from './utils';
+import rootReducer from '../reducers';
+import rootSaga from '../sagas';
+// import rootEpic from './root-epic';
+// import services from '../services';
+
+// browser history
+export const history = createBrowserHistory();
+
+/*
+export const epicMiddleware = createEpicMiddleware<
+    RootAction,
+    RootAction,
+    RootState,
+    Services
+    >({
+    dependencies: services,
+});
+*/
+
+const sagaMiddleware = createSagaMiddleware<>();
+const routerMiddleware = createRouterMiddleware(history);
+
+// configure middlewares
+const middlewares = [sagaMiddleware, routerMiddleware];
+// compose enhancers
+const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+
+// rehydrate state on app start
+const initialState = {};
+
+// create store
+const store = createStore(rootReducer(history), initialState, enhancer);
+
+sagaMiddleware.run(rootSaga);
+
+
+// epicMiddleware.run(rootEpic);
+
+// export store singleton instance
+export default store;
