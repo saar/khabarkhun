@@ -1,5 +1,3 @@
-import {identifier} from "../../../store/types";
-
 export interface LikeState {
     dislikes: number,
     likes: number,
