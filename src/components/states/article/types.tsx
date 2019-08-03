@@ -1,6 +1,6 @@
 import {LikeState} from "../like/types";
 import {DeepReadonly} from "utility-types";
-import {identifier} from "../types";
+import {identifier} from "../../../store/types";
 
 
 type ContentState = Readonly<{}>;

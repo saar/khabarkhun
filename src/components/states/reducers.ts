@@ -1,4 +1,3 @@
-// src/reducers/index.tsx
 import {combineReducers} from "redux";
 
 

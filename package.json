@@ -26,7 +26,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "./node_modules/react-redux-typescript-scripts/eslint.js",
+      "./node_modules/react-redux-typescript-scripts/eslint-prettier.js"
+    ]
   },
   "browserslist": {
     "production": [
@@ -43,6 +47,11 @@
   "devDependencies": {
     "@types/history": "^4.7.2",
     "@types/react-redux": "^7.1.1",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "cucumber": "^5.1.0",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "react-redux-typescript-scripts": "^1.6.2",
     "typesafe-actions": "latest",
     "yarn": "^1.17.3"
   }

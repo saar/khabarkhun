@@ -1,5 +1,4 @@
 import {createAction} from "typesafe-actions";
-import {LikeState} from "../like/types";
 
 
 export const like = createAction('article/like', action => {

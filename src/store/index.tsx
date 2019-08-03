@@ -3,7 +3,7 @@ import {createBrowserHistory} from 'history';
 import {routerMiddleware as createRouterMiddleware} from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga'
 import {composeEnhancers} from './utils';
-import rootReducer from '../reducers';
+import rootReducer from '../components/states';
 import rootSaga from '../sagas';
 // import rootEpic from './root-epic';
 // import services from '../services';

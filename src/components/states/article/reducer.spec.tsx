@@ -21,9 +21,9 @@ describe('Article Stories', () => {
 
     describe('like', () => {
         it('should increment likes count and mark as liked', () => {
-            const initialState = getInitialState();
+            const initialState = getInitialState({like: {liked: false, likes: 25, dislikes: 30, disliked: false}});
             const state = reducer(initialState, like());
-            expect(state.like).toHaveProperty("likes", 1);
+            expect(state.like).toHaveProperty("likes", 26);
             expect(state.like).toHaveProperty("liked", true);
         });
     });
