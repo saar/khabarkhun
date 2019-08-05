@@ -17,14 +17,15 @@
     "react-scripts": "3.0.1",
     "redux": "^4.0.4",
     "typescript": "3.5.3",
-    "utility-types": "^3.7.0"
+    "utility-types": "^3.7.0",
+    "axios": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cucumber": "cucumber-js"
+    "cucumber-test": "cucumber-js"
   },
   "eslintConfig": {
     "extends": "react-app"

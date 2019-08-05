@@ -1,11 +1,11 @@
 declare module "KhabarkhunTypes" {
     export interface Article {
-        id: string;
+        _id: string;
         sourceUrl: URL;
         title: string;
         excerpt: string;
         content?: Content;
-        images?: URL;
+        image?: URL;
         publicationDate?: Date;
         tags: Tag[];
         like: {

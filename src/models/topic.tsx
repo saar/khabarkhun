@@ -1,6 +1,6 @@
 declare module "KhabarkhunTypes" {
     export type Topic = {
-        id: string;
+        _id: string;
         articles?: Article[];
     }
 }

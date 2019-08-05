@@ -20,6 +20,8 @@
     "jsx": "preserve"
   },
   "include": [
-    "src"
-  ],  "extends": "./node_modules/react-redux-typescript-scripts/tsconfig.json"
+    "src",
+    "typings"
+  ],
+  "extends": "./node_modules/react-redux-typescript-scripts/tsconfig.json"
 }

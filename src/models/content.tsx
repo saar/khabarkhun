@@ -1,6 +1,6 @@
 declare module "KhabarkhunTypes" {
     export interface Content {
-        id: string;
+        _id: string;
         url: string;
         title?: string;
 

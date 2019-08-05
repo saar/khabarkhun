@@ -1,14 +1,13 @@
 import {LikeState} from "../like/types";
 import {DeepReadonly} from "utility-types";
-import {identifier} from "../../../store/types";
 
 
 type ContentState = Readonly<{}>;
 
 export declare type ArticleState = DeepReadonly<{
-    id: identifier,
+    id: string,
     like?: LikeState,
-    fullContent?: ContentState,
+    content?: ContentState,
 }>
 
 

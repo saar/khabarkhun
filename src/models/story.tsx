@@ -1,6 +1,6 @@
 declare module "KhabarkhunTypes" {
     export type Story = {
-        id: string;
+        _id: string;
         title: string;
         related?: Story[];
         topics?: Topic[];
